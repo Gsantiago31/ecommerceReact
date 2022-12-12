@@ -1,3 +1,3 @@
 
+export * from './ProductView';
 export * from './NothingSelectedView';
-export * from './CardView';

@@ -1,16 +1,16 @@
-import { TurnedInNot } from "@mui/icons-material";
-import { Divider, Grid, ListItem, ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
+import { Inventory, TurnedInNot } from "@mui/icons-material";
+import { Avatar, Divider, Grid, ListItem, ListItemAvatar, ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
 import React from "react";
 import { useMemo } from "react";
 import { useDispatch } from "react-redux";
-import { setActiveCard } from "../../store/dashboard";
+import { setActiveProduct } from "../../store/dashboard";
 
-export const SidebarItem = ({ title = '', body, id, date, imageUrls = []  }) => {
+export const ProductItem = ({ title = '', description, shortDescription, color, price, tags, id, date, imageUrls = []  }) => {
 
   const dispatch = useDispatch();
 
   const onClickNote = () => {
-    dispatch(setActiveCard({ title, id, body, date, imageUrls }))
+    dispatch(setActiveProduct({ title, id, description, shortDescription, color, price, tags, date, imageUrls }))
   }
 
   const newTitle = useMemo(() => {
@@ -21,22 +21,25 @@ export const SidebarItem = ({ title = '', body, id, date, imageUrls = []  }) => 
 
   },[ title ])
 
-
   return (
     <ListItem key={id} disablePadding
     sx={{backgroundColor: 'primary.main', borderBottom: '1px solid', borderBottomColor: 'secondary.main'}}>
       <ListItemButton onClick={ onClickNote }>
-        <ListItemIcon>
-          <TurnedInNot 
-          sx={{color: '#fff'}}
+        <ListItemAvatar>
+          <Avatar
+            alt={title}
+            src={imageUrls[0]}
           />
-        </ListItemIcon>
+        </ListItemAvatar>
         <Grid container sx={{color: '#fff'}}>
           <ListItemText 
           primary={ newTitle }
           />
           <ListItemText
-            secondary={ body }
+            primary={ color }
+          />
+          <ListItemText
+          primary={price}
           />
         </Grid>
       </ListItemButton>

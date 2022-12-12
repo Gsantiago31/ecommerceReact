@@ -5,77 +5,60 @@ export const dashboardSlice = createSlice({
     initialState: {
         isSaving: false,
         messageSaved: '',
-        cards: [],
+        products: [],
         active: null,
-        // active: {
-        //     id: 'ABC123',
-        //     title: '',
-        //     body: '',
-        //     date: 1234567,
-        //     imageUrls: [], // https://foto1.jpg, https://foto2.jpg,
-        // }
     },
     reducers: {
-        savingNewCard: ( state ) => {
+        savingNewProduct: ( state ) => {
             state.isSaving = true;
         },
-        addNewEmptyCard: (state, action ) => {
-            state.cards.push( action.payload );
+        addNewEmptyProduct: (state, action ) => {
+            state.products.push( action.payload );
             state.isSaving = false;
         },
-        setActiveCard: (state, action ) => {
+        setActiveProduct: (state, action ) => {
             state.active = action.payload;
             state.messageSaved = '';
         },
-        setCards: (state, action ) => {
-            state.cards = action.payload;
+        setProducts: (state, action ) => {
+            state.products = action.payload;
         },
         setSaving: (state) => {
             state.isSaving = true;
             state.messageSaved = '';
             // TODO: mensaje de error...
         },
-        updateCard: (state, action ) => { // payload : note
+        updateProduct: (state, action ) => { // payload : note
             state.isSaving = false;
-            state.cards = state.cards.map(card => {
+            state.products = state.products.map(product => {
 
-                if (card.id === action.payload.id) {
+                if (product.id === action.payload.id) {
                     return action.payload;
                 }
 
-                return card;
+                return product;
             });
 
             // Todo: Mostrar mensaje de actualización
             state.messageSaved = `${ action.payload.title }, actualizada correctamente`;
         },
-        setPhotosToActiveCard: ( state, action) => {
+        setPhotosToActiveProduct: ( state, action) => {
             state.active.imageUrls = [ ...state.active.imageUrls, ...action.payload ];
             state.isSaving = false;
         },
-        clearCardsLogout: (state) => {
+        clearProductsLogout: (state) => {
             state.isSaving = false;
             state.messageSaved = '';
-            state.cards = [];
+            state.products = [];
             state.active = null;
         },
-        deleteCardById: (state, action ) => {
+        deleteProductById: (state, action ) => {
             state.active = null;
-            state.cards = state.cards.filter( card => card.id !== action.payload );
+            state.products = state.products.filter( product => product.id !== action.payload );
         }
     }
 });
 
 
 // Action creators are generated for each case reducer function
-export const { 
-    savingNewCard,
-    addNewEmptyCard,
-    setActiveCard,
-    setCards,
-    setSaving,
-    updateCard,
-    deleteCardById,
-    setPhotosToActiveCard,
-    clearCardsLogout,
- } = dashboardSlice.actions;
+export const { savingNewProduct, addNewEmptyProduct, setActiveProduct, setProducts, setSaving, updateProduct, setPhotosToActiveProduct, clearProductsLogout, deleteProductById } = dashboardSlice.actions;

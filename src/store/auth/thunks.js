@@ -1,5 +1,6 @@
-import { loginWithEmailPassword, registerUserWithEmailPassword, singInWithGoogle, logoutFirebase } from '../../firebase/providers';
-import { clearCardsLogout } from '../dashboard';
+import { loginWithEmailPassword, registerUserWithEmailPassword, logoutFirebase, singInWithGoogle } from '../../firebase/providers';
+import { clearProductsLogout } from '../dashboard/dashboardSlice';
+// import { clearCardsLogout } from '../dashboard';
 import { checkingCredentials, logout, login } from './';
 
 export const checkingAuthentication = () => {
@@ -59,7 +60,7 @@ export const startLogout = () => {
     return async( dispatch ) => {
         
         await logoutFirebase();
-        dispatch( clearCardsLogout() );
+        dispatch( clearProductsLogout() );
         dispatch( logout() );
 
     }

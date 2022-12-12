@@ -1,5 +1,7 @@
-import { AppRouter } from './routers/AppRouter'
-import { AppTheme } from './theme'
+import { AppRouter } from "./routers/AppRouter";
+import { AppTheme } from "./theme";
+
+import "@tremor/react/dist/esm/tremor.css";
 
 function App() {
 
@@ -7,7 +9,8 @@ function App() {
     <AppTheme>
       <AppRouter />
     </AppTheme>
-  )
+  );
+
 }
 
-export default App
+export default App;

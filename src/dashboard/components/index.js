@@ -1,5 +1,11 @@
 
-export * from './NavBar';
-export * from './SideBar';
-export * from './ImageGallery';
-export * from './SidebarItem';
+export * from './Sidebar';
+export * from './ProductItem';
+export * from './ProductList';
+export * from './OrderLayout';
+
+export * from './Sales';
+export * from './userAnalytics';
+export * from './donutGraphics';
+export * from './areaChart';
+export * from './profile';
