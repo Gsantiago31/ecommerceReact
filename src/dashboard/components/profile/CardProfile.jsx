@@ -3,7 +3,7 @@ import { Avatar, Divider, Grid, Typography } from '@mui/material'
 export const CardProfile = ({name, rol, url}) => {
   return (
     <Grid>
-        <Avatar sx={{height: '250px', width: '250px'}}
+        <Avatar sx={{height: {xs: '200px', md: '250px'}, width: { xs: '200px', md: '250px'}}}
         src={url}
         />
         <Divider sx={{m: '15px'}}/>

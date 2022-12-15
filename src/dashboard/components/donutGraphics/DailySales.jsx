@@ -37,7 +37,7 @@ export const DailySales = () => {
         <DonutChart />
       </Box>
       <Grid container sx={{ width: '90%', height: "10%"}}>
-        <Grid item xs={5} sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-around'}}>
+        <Grid item xs={12} md={5} sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-around'}}>
             <Typography fontSize={'12px'}>Ayer</Typography>
             <Box sx={{display: 'flex', flexDirection: 'column'}}>
             <Box sx={{display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
@@ -54,7 +54,7 @@ export const DailySales = () => {
             <Typography align={'center'} fontSize={'15px'}>125</Typography>
             </Box>
         </Grid>
-        <Grid item xs={7} sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-around'}}>
+        <Grid item xs={12} md={7} sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-around'}}>
             <Typography fontSize={'12px'}>Total Hoy</Typography>
             <Box sx={{display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'flex-start'}}>
             <Person sx={{width: '15px', color: 'dashboard.secondary'}}/>

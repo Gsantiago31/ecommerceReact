@@ -8,6 +8,7 @@ export const DashboardLayout = ({ children }) => {
   return (
     <Box sx={{ display: 'flex' }}>
         
+        
         <Sidebar drawerWidth={ drawerWidth }/>
 
         <Box 

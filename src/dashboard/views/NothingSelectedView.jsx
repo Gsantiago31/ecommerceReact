@@ -15,11 +15,11 @@ export const NothingSelectedView = () => {
           borderRadius: 3,
         }}
       >
-          <Grid item xs={4}>
+          <Grid item xs={12} md={4}>
             <ProductList />
           </Grid>
 
-          <Grid item xs={8} sx={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+          <Grid item xs={8} sx={{display: {xs: 'none', md: 'flex'}, flexDirection: 'column', alignItems: 'center'}}>
             <Grid
               item
               xs={12}

@@ -2,7 +2,7 @@ import { async } from "@firebase/util"
 import { collection, deleteDoc, doc, setDoc } from "firebase/firestore/lite";
 import { FirebaseDB } from "../../firebase/config";
 import { fileUpload, loadProducts } from "../../helpers";
-import { addNewEmptyProduct, savingNewProduct, setActiveProduct, setPhotosToActiveProduct, setProducts, setSaving, updateProduct } from "./dashboardSlice";
+import { addNewEmptyProduct, deleteProductById, savingNewProduct, setActiveProduct, setPhotosToActiveProduct, setProducts, setSaving, updateProduct } from "./dashboardSlice";
 
 
 export const startNewProduct = () => {
@@ -70,17 +70,24 @@ export const startSaveProduct = () => {
 
 
 export const startUploadingFiles = ( files = [] ) => {
-    return async( dispatch ) => {
+    return async( dispatch, getState ) => {
         dispatch( setSaving() );
-            
-        await fileUpload( files[0] );
+
+        const { active:product } = getState().dashboard;
+
+        const id = product.id;
+
+        const result = await fileUpload( files );
+        console.log(result)
         const fileUploadPromises = [];
         for ( const file of files ) {
-            fileUploadPromises.push( fileUpload( file ) )
+            fileUploadPromises.push( fileUpload( file, id ) )
         }
 
         const photosUrls = await Promise.all( fileUploadPromises );
         
+        console.log(`Lista de ${photosUrls}`);
+
         dispatch( setPhotosToActiveProduct( photosUrls ));
         
     }

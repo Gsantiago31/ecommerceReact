@@ -24,10 +24,12 @@ import {
   setActiveProduct,
   startDeletingProduct,
   startSaveProduct,
+  startUploadingFiles,
   //   startUploadingFiles,
 } from "../../store/dashboard";
 import { useRef } from "react";
 import { ProductList } from "../components";
+import { useState } from "react";
 
 const group = [
   {
@@ -50,10 +52,13 @@ const group = [
 export const ProductView = () => {
   const dispatch = useDispatch();
 
+  const [ files, setFiles ] = useState(null);
+
   const {
     active: product,
     messageSaved,
     isSaving,
+  
   } = useSelector((state) => state.dashboard);
 
   const {
@@ -89,13 +94,18 @@ export const ProductView = () => {
     setActiveProduct;
   }, [messageSaved]);
 
-  const onSaveProduct = () => {
+  const onSaveProduct = (e) => {
+    e.preventDefault();
     dispatch(startSaveProduct());
   };
 
+  const fileInputRef = useRef();
+
+  console.log(product.id);
+
   const onInputFileChange = ({ target }) => {
     if (target.files === 0) return;
-    dispatch(startUploadingFiles(target.files));
+    dispatch(startUploadingFiles(target.files, product.id));
   };
 
   const onDelete = () => {
@@ -114,20 +124,22 @@ export const ProductView = () => {
           borderRadius: 3,
         }}
       >
-        <Grid item xs={4}>
+        <Grid item md={4} sx={{display: {xs: 'none', md: 'block'}}}>
           <ProductList />
         </Grid>
-        <Grid item xs={8}>
+        <Grid item xs={12} md={8} sx={{p: '25px', backgroundColor: 'dashboard.background'}}>
           <Grid item>
-            <Typography fontSize={39} fontWeight="light">
+            <Typography align="center" fontWeight="light">
               {dateString}
             </Typography>
           </Grid>
           <Grid item>
             <input
               type="file"
+              ref={fileInputRef}
               multiple
               onChange={onInputFileChange}
+              // onChange={e => setFiles(e.target.files[0])}
               style={{ display: "none" }}
             />
             <IconButton
@@ -164,7 +176,7 @@ export const ProductView = () => {
               variant="filled"
               fullWidth
               multiline
-              label="Description"
+              label="Descripción"
               minRows={5}
               sx={{ border: "none", mb: 1 }}
               name="description"
@@ -176,7 +188,7 @@ export const ProductView = () => {
               variant="filled"
               fullWidth
               multiline
-              label="Description"
+              label="Descripción Corta"
               minRows={5}
               sx={{ border: "none", mb: 1 }}
               name="shortDescription"
@@ -194,7 +206,6 @@ export const ProductView = () => {
               onChange={onInputChange}
             />
             <TextField
-              // id="filled-select-currency"
               select
               label="Categoría"
               value={category}

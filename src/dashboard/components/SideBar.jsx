@@ -18,6 +18,7 @@ import {
   Toolbar,
   Typography,
 } from "@mui/material";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { startLogout } from "../../store";
@@ -44,6 +45,7 @@ const icons = [
 ];
 
 export const Sidebar = ({ drawerWidth = 60 }) => {
+
   const dispatch = useDispatch();
 
   const onLogout = () => {
@@ -53,7 +55,7 @@ export const Sidebar = ({ drawerWidth = 60 }) => {
   return (
     <Box
       component="nav"
-      sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
+      sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 }, display: {xs: 'none', md: 'block'} }}
     >
       <Drawer
         variant="permanent" // temporary

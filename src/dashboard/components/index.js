@@ -9,3 +9,4 @@ export * from './userAnalytics';
 export * from './donutGraphics';
 export * from './areaChart';
 export * from './profile';
+export * from './MenuMobile';
