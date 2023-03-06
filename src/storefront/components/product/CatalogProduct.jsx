@@ -1,16 +1,38 @@
-import { Favorite, FavoriteBorder, FavoriteBorderOutlined, FavoriteOutlined, Home, Share } from "@mui/icons-material";
+import { Favorite, FavoriteBorder, FavoriteBorderOutlined, FavoriteOutlined, Home, Share, ShoppingCart } from "@mui/icons-material";
 import { Button, Card, CardActionArea, CardActions, CardContent, CardMedia, Grid, IconButton, Typography } from "@mui/material";
 import React, { useState } from "react";
-
-export const CatalogProduct = ({ imageUrls = [], price, title }) => {
+import { useDispatch, useSelector } from "react-redux";
+import { setActiveWishProduct, startDeleteWishProduct, startNewCartProduct, startNewWishProduct } from "../../../store/storefront";
+ 
+export const CatalogProduct = ({ id, imageUrls = [], price, title }) => {
   
-  const [wish, setWish] = useState(false)
+  const dispatch = useDispatch();
 
+  const [wish, setWish] = useState(false)
+  const { wishList, activeWishProduct } = useSelector( (state) => state.storefront)
+
+ 
   const onWishSelected = () => {
-    setWish(current => !current)
+    
+    dispatch(setActiveWishProduct( id ))
+    const existeObjetoConId = wishList.some((objeto) => objeto.id === activeWishProduct);
+   
+
+    if (existeObjetoConId) {
+      setWish(false)
+      dispatch(startDeleteWishProduct(id))
+    }else {
+      setWish(true)
+      dispatch(startNewWishProduct(id ,imageUrls = [], price, title))
+    }
+  }
+
+  const OnClickCart = () => {
+    dispatch(startNewCartProduct(imageUrls = [], price, title))
   }
 
   return (
+    <Grid item xs={3}>
     <Card sx={{ maxWidth: 300, m: '20px' }}>
       <CardActionArea>
         <CardMedia
@@ -29,9 +51,9 @@ export const CatalogProduct = ({ imageUrls = [], price, title }) => {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="small" color="primary" sx={{border: '1px solid', borderColor: 'dashboard.secondary', borderRadius: '20px','&:hover': {backgroundColor: 'dashboard.secondary'} }}>
-          <Typography variant="button">Añadir al carrito</Typography>
-        </Button>
+        <IconButton onClick={OnClickCart}>
+        <ShoppingCart />
+        </IconButton>
         <IconButton onClick={onWishSelected} sx={{color: 'dashboard.secondary'}}>
           {wish ? <Favorite /> : <FavoriteBorderOutlined/> }
         </IconButton>
@@ -40,5 +62,6 @@ export const CatalogProduct = ({ imageUrls = [], price, title }) => {
         </IconButton>
       </CardActions>
     </Card>
+    </Grid>
   );
 };

@@ -1,157 +1,97 @@
-import { Box, CardMedia, Grid, MenuItem, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  CardMedia,
+  Divider,
+  Grid,
+  MenuItem,
+  Typography,
+} from "@mui/material";
 import React from "react";
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
-import { CatalogProduct, Navbar } from "../components";
+import { CatalogProduct, Navbar, OurProduct } from "../components";
 import { Footer } from "../components/footer";
 import { GalleryImage } from "../components/gallery";
 import { Header } from "../layout";
+import { AnimationOnScroll } from "react-animation-on-scroll";
 
 export const HomePage = () => {
+  const { products } = useSelector((state) => state.storefront);
 
-  const { products } = useSelector( state => state.storefront)
-
+  // const productsShow = [...products];
+  // const mappedItems = productsShow.sort(() => Math.random() - 0.5).slice(0, 4);
   return (
     <Box>
       <Header
         title={"Crochet Pinturas y más"}
         subtitle={"Todo lo que más deseas"}
       />
-      <Typography variant="h3" sx={{ textAlign: "center" }}>
-        Nuestro Producto
+
+      <Typography variant="h4" sx={{ textAlign: "center" }}>
+        Bienvenido al mundo de ViVTwins
       </Typography>
+        <OurProduct />
+
+      <Divider sx={{ width: "20%", margin: "auto", p: "10px" }} />
+
+      <AnimationOnScroll duration={2} animateIn="animate__fadeIn">
+      <Typography variant="h4" sx={{ mt: "25px", textAlign: "center" }}>
+        ¿Has visto todos los patrones que tenemos para tì?
+      </Typography>
+
       <Grid
         container
         sx={{
           display: "flex",
-          flexDirection: { xs: "column", md: "row" },
-          justifyContent: "space-evenly",
-          alignItems: 'center',
-        }}
-      >
-        <Grid
-          item
-          xs={8}
-          md={5}
-          sx={{
-            display: "flex",
-            flexWrap: "wrap",
-            justifyContent: "space-evenly",
-            mt: "20px",
-          }}
-        >
-          <CardMedia
-            component="img"
-            image="https://firebasestorage.googleapis.com/v0/b/gsdesign-31114.appspot.com/o/Gemelas%2Fimgservicios.png?alt=media&token=e376f2a8-4f9f-4f5e-87eb-95aabf3ecf3f"
-            alt="green iguana"
-            sx={{ mb: "10px", width: "40%" }}
-          />
-          <CardMedia
-            component="img"
-            height="200px"
-            image="https://firebasestorage.googleapis.com/v0/b/gsdesign-31114.appspot.com/o/Gemelas%2Fimgservicios.png?alt=media&token=e376f2a8-4f9f-4f5e-87eb-95aabf3ecf3f"
-            alt="green iguana"
-            sx={{ mb: "10px", width: "40%" }}
-          />
-          <CardMedia
-            component="img"
-            height="200px"
-            image="https://firebasestorage.googleapis.com/v0/b/gsdesign-31114.appspot.com/o/Gemelas%2Fimgservicios.png?alt=media&token=e376f2a8-4f9f-4f5e-87eb-95aabf3ecf3f"
-            alt="green iguana"
-            sx={{ mb: "10px" }}
-          />
-        </Grid>
-        <Grid
-          item
-          xs={8}
-          md={5}
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <Grid
-            container
-            sx={{
-              display: "flex",
-              flexDirection: "row",
-              pb: "30px",
-              justifyContent: { sx: "center", md: "flex-start" },
-            }}
-          >
-            <Box
-              sx={{
-                background: "#4d0686",
-                width: "30px",
-                borderRadius: "30px",
-                mr: "10px",
-              }}
-            >
-              <Typography
-                variant="h6"
-                textAlign={"center"}
-                color={"fontColor.main"}
-              >
-                1
-              </Typography>
-            </Box>
-            <Typography variant="h6">Los Mejores Resultados</Typography>
-          </Grid>
-          <Grid
-            container
-            sx={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: { sx: "center", md: "center" },
-            }}
-          >
-            <Box
-              sx={{
-                background: "#4d0686",
-                width: "30px",
-                borderRadius: "30px",
-                mr: "10px",
-              }}
-            >
-              <Typography
-                variant="h6"
-                textAlign={"center"}
-                color={"fontColor.main"}
-              >
-                2
-              </Typography>
-            </Box>
-            <Typography variant="h6">Los mejores productos</Typography>
-          </Grid>
-        </Grid>
-      </Grid>
-      <Typography variant="h4" sx={{ mt: "50px", textAlign: "center" }}>
-        Catálogo
-      </Typography>
-      <Grid
-        container
-        sx={{
-          display: "flex",
-          justifyContent: "flex-start",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "space-between",
           mt: "50px",
           backgroundColor: "#f2f2f2",
         }}
       >
-        {
-          products.map(product =>(
-            <CatalogProduct key={product.id} {...product}/>
-          ))
-        }
+        <Grid
+          container
+          sx={{
+            mt: "50px",
+            backgroundColor: "#f2f2f2",
+          }}
+        >
+          {products.map((product) => (
+            <CatalogProduct key={product.id} {...product} />
+          ))}
+        </Grid>
+        <NavLink
+          to={`/products`}
+          style={() => ({
+            textDecoration: "none",
+          })}
+        >
+          <Button
+            color="primary"
+            sx={{
+              width: "150px",
+              border: "1px solid",
+              borderColor: "dashboard.secondary",
+              borderRadius: "20px",
+              mb: "50px",
+              "&:hover": { backgroundColor: "dashboard.secondary" },
+            }}
+          >
+            <Typography variant="button">Ver más</Typography>
+          </Button>
+        </NavLink>
       </Grid>
+      </AnimationOnScroll>
+      <AnimationOnScroll duration={2} animateIn="animate__fadeIn">
       <Grid
         container
         spacing={2}
         sx={{
           justifyContent: "center",
           pt: "50px",
-          pb: "30px",
+          pb: "50px",
           backgroundColor: "#f2f2f2",
         }}
       >
@@ -212,7 +152,7 @@ export const HomePage = () => {
           </Typography>
         </Grid>
       </Grid>
-
+       </AnimationOnScroll>
       <Footer />
     </Box>
   );

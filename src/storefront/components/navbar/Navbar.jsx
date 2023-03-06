@@ -17,6 +17,7 @@ import { Favorite, Person, ShoppingCart } from "@mui/icons-material";
 import { CardMedia, Grid } from "@mui/material";
 import { useSelector } from "react-redux";
 import { useState } from "react";
+import { WishList } from "../product";
 
 const pages = [
   {
@@ -41,21 +42,25 @@ export const Navbar = () => {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
   const [anchorElWish, setAnchorElWish] = useState(null);
-  const { status } = useSelector( state => state.auth );
+  const { status } = useSelector((state) => state.auth);
+
+  const { wishList } = useSelector((state) => state.storefront);
+
+  console.log(wishList);
 
   const settings = [
     {
       title: "Profile",
-      url: "/"
+      url: "/",
     },
     {
       title: "Account",
-      url: "/"
+      url: "/",
     },
     {
       title: "Dashboard",
-      url: "/"
-    }
+      url: "/",
+    },
   ];
 
   const handleOpenNavMenu = (event) => {
@@ -133,7 +138,7 @@ export const Navbar = () => {
                   <NavLink
                     to={`${page.url}`}
                     style={({ isActive }) => ({
-                      color: isActive ? "#000" : "#e30052",
+                      color: isActive ? "#e30052" : "#000",
                       textDecoration: "none",
                     })}
                   >
@@ -176,7 +181,7 @@ export const Navbar = () => {
                 <NavLink
                   to={`${page.url}`}
                   style={({ isActive }) => ({
-                    color: isActive ? "#fff" : "#e30052",
+                    color: isActive ? "#e30052" : "#000",
                     textDecoration: "none",
                   })}
                 >
@@ -191,17 +196,17 @@ export const Navbar = () => {
               <NavLink
                 to={"/cart"}
                 style={({ isActive }) => ({
-                  color: isActive ? "#fff" : "#e30052",
+                  color: isActive ? "#e30052" : "#000",
                   textDecoration: "none",
                 })}
               >
                 <ShoppingCart></ShoppingCart>
               </NavLink>
             </IconButton>
-            
+
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenWishList} sx={{ p: 0 }}>
-                <Favorite sx={{ color: "secondary.main" }} />
+                <Favorite sx={{ color: "primary.main" }} />
               </IconButton>
             </Tooltip>
             <Menu
@@ -220,15 +225,18 @@ export const Navbar = () => {
               open={Boolean(anchorElWish)}
               onClose={handleCloseWishList}
             >
-                <MenuItem onClick={handleCloseWishList}>
-                  <Typography textAlign="center">No items added</Typography>
-                </MenuItem>
-             
+              {wishList.map((wishProduct) => {
+                return (
+                  <MenuItem onClick={handleCloseWishList}>
+                    <WishList key={wishProduct.id} {...wishProduct} />
+                  </MenuItem>
+                );
+              })}
             </Menu>
 
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Person sx={{ color: "secondary.main" }} />
+                <Person sx={{ color: "primary.main" }} />
               </IconButton>
             </Tooltip>
             <Menu
@@ -247,22 +255,25 @@ export const Navbar = () => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {status === "authenticated" 
-              ? (settings.map( setting => (
-                <MenuItem key={setting.title} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting.title}</Typography>
+              {status === "authenticated" ? (
+                settings.map((setting) => (
+                  <MenuItem key={setting.title} onClick={handleCloseUserMenu}>
+                    <Typography textAlign="center">{setting.title}</Typography>
+                  </MenuItem>
+                ))
+              ) : (
+                <MenuItem onClick={handleCloseUserMenu}>
+                  <NavLink
+                    to={"/auth"}
+                    style={({ isActive }) => ({
+                      color: isActive ? "#e30052" : "#000",
+                      textDecoration: "none",
+                    })}
+                  >
+                    <Typography textAlign="center">Login</Typography>
+                  </NavLink>
                 </MenuItem>
-              )))
-              : <MenuItem onClick={handleCloseUserMenu}>
-                <NavLink 
-                to={"/auth"}
-                style={({ isActive }) => ({
-                  color: isActive ? "#fff" : "#e30052",
-                  textDecoration: "none",
-                })}>
-                  <Typography textAlign="center">Login</Typography>
-                </NavLink>
-                </MenuItem>}
+              )}
             </Menu>
           </Box>
         </Toolbar>

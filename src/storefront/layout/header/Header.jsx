@@ -1,12 +1,13 @@
 import { Box, Grid, Typography } from "@mui/material";
 import React from "react";
 import { Navbar } from "../../components";
+import background from "../../../assets/img/background.png" 
 
 import "./header.scss";
 
 export const Header = ({title, subtitle}) => {
   return (
-    <Grid container sx={{ background: "linear-gradient(to right, #89fffd, #ef32d9)", height: '500px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+    <Grid container sx={{ backgroundImage: `url(${background})` , height: '500px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
       <Navbar />
       <Grid item className="animate__animated animate__rubberBand" sx={{display: 'flex', flexDirection: 'column', alignItems: 'center', color: 'fontColor.main'}}>
       <Typography variant="h3" sx={{textAlign: 'center'}}>{title}</Typography>
