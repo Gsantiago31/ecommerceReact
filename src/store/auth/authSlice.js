@@ -12,6 +12,15 @@ export const authSlice = createSlice({
         errorMessage: null,
     },
     reducers: {
+        loginAdmin: ( state, { payload } ) => {
+            state.status = 'admin', // 'checking', 'not-authenticated', 'authenticated'
+            state.uid = payload.uid;
+            state.email = payload.email;
+            state.displayName = payload.displayName;
+            state.rol = payload.rol;
+            state.photoURL = payload.photoURL;
+            state.errorMessage = null;
+        },
         login: ( state, { payload } ) => {
             state.status = 'authenticated', // 'checking', 'not-authenticated', 'authenticated'
             state.uid = payload.uid;
@@ -38,4 +47,5 @@ export const authSlice = createSlice({
 
 
 // Action creators are generated for each case reducer function
-export const { login, logout, checkingCredentials } = authSlice.actions;
+export const { login, loginAdmin, logout, checkingCredentials } = authSlice.actions;
+

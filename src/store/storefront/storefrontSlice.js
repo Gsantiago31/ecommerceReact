@@ -9,7 +9,7 @@ export const storefrontSlice = createSlice({
         activeWishProduct: [],
         cart: []
     },
-    reducers: {
+   reducers: {
         setProducts: (state, action ) => {
             state.products = action.payload;
         },

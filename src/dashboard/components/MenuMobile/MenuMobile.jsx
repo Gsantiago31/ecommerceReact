@@ -1,11 +1,16 @@
-import { Home } from '@mui/icons-material';
+import { Home, Logout } from '@mui/icons-material';
 import { IconButton, Menu, MenuItem, Tooltip, Typography } from '@mui/material';
 import React, { useState } from 'react'
 import { NavLink } from 'react-router-dom';
+import { startLogout } from '../../../store';
+import { useDispatch } from 'react-redux';
 
 export const MenuMobile = () => {
 
     const [anchorElWish, setAnchorElWish] = useState(null);
+
+
+    const dispatch = useDispatch();
 
     const handleOpenMenu = (event) => {
         setAnchorElWish(event.currentTarget);
@@ -13,6 +18,10 @@ export const MenuMobile = () => {
     
       const handleCloseMenu = () => {
         setAnchorElWish(null);
+      };
+
+      const onLogout = () => {
+        dispatch(startLogout());
       };
 
   return (
@@ -96,6 +105,11 @@ export const MenuMobile = () => {
             >
               <Typography textAlign="center">Analítica</Typography>
             </NavLink>
+          </MenuItem>
+          <MenuItem>
+          <IconButton onClick={onLogout} sx={{ color: "red" }}>
+            <Logout />
+          </IconButton>
           </MenuItem>
         </Menu>
         </>

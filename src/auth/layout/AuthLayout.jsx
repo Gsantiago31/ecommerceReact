@@ -1,7 +1,10 @@
 import { Grid, Typography } from "@mui/material";
-
+import { useCheckAuth } from "../../hooks";
 
 export const AuthLayout = ({ children, title = '' }) => {
+
+const status = useCheckAuth();
+
   return (
     <Grid
       container

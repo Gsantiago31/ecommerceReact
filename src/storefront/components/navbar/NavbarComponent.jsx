@@ -7,27 +7,27 @@ import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
-import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-import AdbIcon from "@mui/icons-material/Adb";
-import { Link, NavLink } from "react-router-dom";
-import { Favorite, Person, ShoppingCart } from "@mui/icons-material";
+import { NavLink } from "react-router-dom";
+import { Favorite, Logout, Person, ShoppingCart } from "@mui/icons-material";
 import { CardMedia, Grid } from "@mui/material";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import { WishList } from "../product";
+import { startLogout } from "../../../store/auth";
+import background from "../../../assets/img/background.png";
 
 const pages = [
   {
     title: "Inicio",
     url: "/home",
   },
-  {
-    title: "Acerca de",
-    url: "/about",
-  },
+  // {
+  //   title: "Acerca de",
+  //   url: "/about",
+  // },
   {
     title: "Catálogo",
     url: "/products",
@@ -38,7 +38,7 @@ const pages = [
   },
 ];
 
-export const Navbar = () => {
+export const NavbarComponent = () => {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
   const [anchorElWish, setAnchorElWish] = useState(null);
@@ -46,7 +46,7 @@ export const Navbar = () => {
 
   const { wishList } = useSelector((state) => state.storefront);
 
-  console.log(wishList);
+  const dispatch = useDispatch();
 
   const settings = [
     {
@@ -60,7 +60,7 @@ export const Navbar = () => {
     {
       title: "Dashboard",
       url: "/",
-    },
+    }
   ];
 
   const handleOpenNavMenu = (event) => {
@@ -84,8 +84,12 @@ export const Navbar = () => {
     setAnchorElWish(null);
   };
 
+  const onLogout = () => {
+    dispatch(startLogout());
+  };
+
   return (
-    <AppBar position="static" sx={{ backgroundColor: "transparent" }}>
+    <AppBar position="fixed" sx={{ backgroundColor: "transparent", backgroundImage: `url(${background})`, backgroundRepeat: "no-repeat", backgroundSize: "cover" }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Grid
@@ -209,6 +213,7 @@ export const Navbar = () => {
                 <Favorite sx={{ color: "primary.main" }} />
               </IconButton>
             </Tooltip>
+            
             <Menu
               sx={{ mt: "45px" }}
               id="menu-appbar"
@@ -227,8 +232,8 @@ export const Navbar = () => {
             >
               {wishList.map((wishProduct) => {
                 return (
-                  <MenuItem onClick={handleCloseWishList}>
-                    <WishList key={wishProduct.id} {...wishProduct} />
+                  <MenuItem key={wishProduct.id}>
+                    <WishList  {...wishProduct} />
                   </MenuItem>
                 );
               })}
@@ -239,6 +244,14 @@ export const Navbar = () => {
                 <Person sx={{ color: "primary.main" }} />
               </IconButton>
             </Tooltip>
+            { status === 'authenticated' &&
+              <Tooltip title="Cerrar sesión">
+              <IconButton onClick={onLogout} sx={{ p: 0 }}>
+                <Logout sx={{ color: "red" }} />
+              </IconButton>
+            </Tooltip>
+            }
+            
             <Menu
               sx={{ mt: "45px" }}
               id="menu-appbar"

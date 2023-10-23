@@ -1,7 +1,7 @@
 import { loginWithEmailPassword, registerUserWithEmailPassword, logoutFirebase, singInWithGoogle } from '../../firebase/providers';
 import { clearProductsLogout } from '../dashboard/dashboardSlice';
 // import { clearCardsLogout } from '../dashboard';
-import { checkingCredentials, logout, login } from './';
+import { checkingCredentials, logout, login, loginAdmin } from './';
 
 export const checkingAuthentication = () => {
     return async( dispatch ) => {
@@ -20,7 +20,12 @@ export const startGoogleSignIn = () => {
         const result = await singInWithGoogle();
         if ( !result.ok ) return dispatch( logout( result.errorMessage ) );
 
-        dispatch( login( result ))
+        console.log(result);
+        if (result.uid === 'eu1fjYLeV8cxmKcYfLDBAHIB97y2') {
+            dispatch( loginAdmin(result))
+        }else {
+             dispatch( login( result ))
+        }
 
     }
 }

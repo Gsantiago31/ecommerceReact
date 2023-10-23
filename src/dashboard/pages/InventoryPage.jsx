@@ -11,18 +11,9 @@ import { NothingSelectedView, ProductView } from "../views";
 export const InventoryPage = () => {
   const dispatch = useDispatch();
   const { isSaving, active } = useSelector((state) => state.dashboard);
-  const [anchorElWish, setAnchorElWish] = useState(null);
 
   const onCLickNewProduct = () => {
     dispatch(startNewProduct());
-  };
-
-  const handleOpenMenu = (event) => {
-    setAnchorElWish(event.currentTarget);
-  };
-
-  const handleCloseMenu = () => {
-    setAnchorElWish(null);
   };
 
   return (
@@ -47,88 +38,7 @@ export const InventoryPage = () => {
         </IconButton>
 
         <MenuMobile />
-        {/* <Tooltip title="Open settings">
-          <IconButton
-            disabled={isSaving}
-            onClick={handleOpenMenu}
-            size="small"
-            sx={{
-              display: { xs: "fixed", md: "none" },
-              color: "white",
-              backgroundColor: {
-                xs: "dashboard.terciary",
-                md: "secondary.main",
-              },
-              ":hover": { backgroundColor: "secondary.main", opacity: 0.9 },
-              position: "fixed",
-              right: 30,
-              top: 5,
-            }}
-          >
-            <Home sx={{ fontSize: 30 }} />
-          </IconButton>
-        </Tooltip>
-        <Menu
-          sx={{ mt: "45px" }}
-          id="menu-appbar"
-          anchorEl={anchorElWish}
-          anchorOrigin={{
-            vertical: "top",
-            horizontal: "right",
-          }}
-          keepMounted
-          transformOrigin={{
-            vertical: "top",
-            horizontal: "right",
-          }}
-          open={Boolean(anchorElWish)}
-          onClose={handleCloseMenu}
-        >
-          <MenuItem onClick={handleCloseMenu}>
-            <NavLink
-              to={`/dashboard`}
-              style={({ isActive }) => ({
-                color: isActive ? "#e30052" : "#000",
-                textDecoration: "none",
-              })}
-            >
-              <Typography textAlign="center">Dashboard</Typography>
-            </NavLink>
-          </MenuItem>
-          <MenuItem onClick={handleCloseMenu}>
-            <NavLink
-              to={`/profile`}
-              style={({ isActive }) => ({
-                color: isActive ? "#e30052" : "#000",
-                textDecoration: "none",
-              })}
-            >
-              <Typography textAlign="center">Perfil</Typography>
-            </NavLink>
-          </MenuItem>
-          <MenuItem onClick={handleCloseMenu}>
-            <NavLink
-              to={`/inventory`}
-              style={({ isActive }) => ({
-                color: isActive ? "#e30052" : "#000",
-                textDecoration: "none",
-              })}
-            >
-              <Typography textAlign="center">Inventario</Typography>
-            </NavLink>
-          </MenuItem>
-          <MenuItem onClick={handleCloseMenu}>
-            <NavLink
-              to={`/analytics`}
-              style={({ isActive }) => ({
-                color: isActive ? "#e30052" : "#000",
-                textDecoration: "none",
-              })}
-            >
-              <Typography textAlign="center">Analítica</Typography>
-            </NavLink>
-          </MenuItem>
-        </Menu> */}
+       
       </DashboardLayout>
     </>
   );

@@ -1,5 +1,5 @@
 import { CircularProgress, Grid } from '@mui/material';
-
+import background from '../../assets/img/background.png';
 
 export const CheckingAuth = () => {
   return (
@@ -9,7 +9,7 @@ export const CheckingAuth = () => {
       direction="column"
       alignItems="center"
       justifyContent="center"
-      sx={{ minHeight: '100vh', background: "linear-gradient(to right, #89fffd, #ef32d9)", padding: 4 }}
+      sx={{ minHeight: '100vh', backgroundImage: `url(${background})`, padding: 4 }}
     >
 
         <Grid container

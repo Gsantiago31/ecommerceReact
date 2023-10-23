@@ -1,5 +1,6 @@
 import { Box, CardMedia, Grid, Typography } from "@mui/material";
 import React from "react";
+import { CarouselImage } from "../gallery";
 
 export const OurProduct = () => {
   return (
@@ -24,7 +25,7 @@ export const OurProduct = () => {
             mt: "20px",
           }}
         >
-          <CardMedia
+          {/* <CardMedia
             component="img"
             image="https://firebasestorage.googleapis.com/v0/b/gsdesign-31114.appspot.com/o/Gemelas%2Fimgservicios.png?alt=media&token=e376f2a8-4f9f-4f5e-87eb-95aabf3ecf3f"
             alt="green iguana"
@@ -43,73 +44,11 @@ export const OurProduct = () => {
             image="https://firebasestorage.googleapis.com/v0/b/gsdesign-31114.appspot.com/o/Gemelas%2Fimgservicios.png?alt=media&token=e376f2a8-4f9f-4f5e-87eb-95aabf3ecf3f"
             alt="green iguana"
             sx={{ mb: "10px" }}
-          />
+          /> */}
+
+          <CarouselImage/>
         </Grid>
-        <Grid
-          item
-          xs={8}
-          md={5}
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <Grid
-            container
-            sx={{
-              display: "flex",
-              flexDirection: "row",
-              pb: "30px",
-              justifyContent: { sx: "center", md: "flex-start" },
-            }}
-          >
-            <Box
-              sx={{
-                background: "#4d0686",
-                width: "30px",
-                borderRadius: "30px",
-                mr: "10px",
-              }}
-            >
-              <Typography
-                variant="h6"
-                textAlign={"center"}
-                color={"fontColor.main"}
-              >
-                1
-              </Typography>
-            </Box>
-            <Typography variant="h6">Los Mejores Resultados</Typography>
-          </Grid>
-          <Grid
-            container
-            sx={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: { sx: "center", md: "center" },
-            }}
-          >
-            <Box
-              sx={{
-                background: "#4d0686",
-                width: "30px",
-                borderRadius: "30px",
-                mr: "10px",
-              }}
-            >
-              <Typography
-                variant="h6"
-                textAlign={"center"}
-                color={"fontColor.main"}
-              >
-                2
-              </Typography>
-            </Box>
-            <Typography variant="h6">Los mejores productos</Typography>
-          </Grid>
-        </Grid>
+        
       </Grid>
     </>
   );

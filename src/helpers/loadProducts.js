@@ -7,13 +7,10 @@ export const loadProducts = async( uid = '') => {
 
     const collectionRef = collection( FirebaseDB, `${ uid }/store/products` );
     const docs = await getDocs(collectionRef);
-    console.log(docs)
     const products = [];
     docs.forEach( doc => {
         products.push({ id: doc.id, ...doc.data() });
     });
-    console.log(uid)
-    console.log(products)
     return products;
 
 }

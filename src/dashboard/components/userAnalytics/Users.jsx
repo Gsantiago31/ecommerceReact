@@ -1,5 +1,5 @@
 import { CreditCard, Home, Inventory, Person, ShoppingCart } from "@mui/icons-material";
-import { Box, Grid, Icon, Typography } from "@mui/material";
+import { Box, Grid,Typography } from "@mui/material";
 
 export const Users = () => {
   return (

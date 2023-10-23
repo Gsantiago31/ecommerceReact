@@ -1,2 +1,2 @@
 
-export * from './GalleryImage';
+export * from './CarouselImage';

@@ -1,28 +1,30 @@
 import {
   Box,
   Button,
-  CardMedia,
   Divider,
   Grid,
-  MenuItem,
   Typography,
 } from "@mui/material";
 import React from "react";
-import { useSelector } from "react-redux";
+import {useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
-import { CatalogProduct, Navbar, OurProduct } from "../components";
+import { CatalogProduct, NavbarComponent, OurProduct } from "../components";
 import { Footer } from "../components/footer";
-import { GalleryImage } from "../components/gallery";
 import { Header } from "../layout";
 import { AnimationOnScroll } from "react-animation-on-scroll";
 
 export const HomePage = () => {
   const { products } = useSelector((state) => state.storefront);
 
+  console.log(products)
+
   // const productsShow = [...products];
   // const mappedItems = productsShow.sort(() => Math.random() - 0.5).slice(0, 4);
+
+
   return (
     <Box>
+      <NavbarComponent/>
       <Header
         title={"Crochet Pinturas y más"}
         subtitle={"Todo lo que más deseas"}
@@ -53,13 +55,15 @@ export const HomePage = () => {
       >
         <Grid
           container
+          justifyContent={'center'} alignItems={'center'}
           sx={{
             mt: "50px",
             backgroundColor: "#f2f2f2",
+            position: 'relative'
           }}
         >
-          {products.map((product) => (
-            <CatalogProduct key={product.id} {...product} />
+          {products.slice(0,20).map((product) => (
+            <CatalogProduct key={product.id} {...product} size={3}  />
           ))}
         </Grid>
         <NavLink
@@ -84,7 +88,6 @@ export const HomePage = () => {
         </NavLink>
       </Grid>
       </AnimationOnScroll>
-      <AnimationOnScroll duration={2} animateIn="animate__fadeIn">
       <Grid
         container
         spacing={2}
@@ -95,7 +98,7 @@ export const HomePage = () => {
           backgroundColor: "#f2f2f2",
         }}
       >
-        <Grid item xs={10} md={10}>
+        {/* <Grid item xs={10} md={10}>
           <Typography variant="h4" color={"#7B7D7D"} align={"center"}>
             Nuestros Servicios
           </Typography>
@@ -150,9 +153,8 @@ export const HomePage = () => {
             vez elegantes? ¡Tenemos lo que buscas! Colgantes de macetas hechos
             totalmente a mano.
           </Typography>
-        </Grid>
+        </Grid> */}
       </Grid>
-       </AnimationOnScroll>
       <Footer />
     </Box>
   );
